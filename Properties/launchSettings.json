@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "ProceduralGeometryTest": {
+      "commandName": "Project"
+    },
+    "Perfil 1": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64.exe",
+      "commandLineArgs": "–path,--verbose\r\n\r\n",
+      "workingDirectory": ".",
+      "nativeDebugging": true
+    }
+  }
+}
