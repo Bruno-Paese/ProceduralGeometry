@@ -17,35 +17,55 @@ public partial class ProceduralPlane : MeshInstance3D
 
 	[Export]
 	public int HeightSegments = 1;
+	Vector3 localUp = Vector3.Up;
+	Vector3 axisA;
+	Vector3 axisB;
 
 	public override void _Ready()
 	{
 		base._Ready();
 		GD.Print("ahhhhh1");
+
+		axisA = new Vector3(localUp.Y, localUp.Z, localUp.X);
+		axisB = localUp.Cross(axisA);
+
+
 		GeneratePlane();
 	}
 
 	private void GeneratePlane()
 	{
 		ArrayMesh a_mesh = new ArrayMesh();
-		List<Vector3> vertices = new List<Vector3>();
-		List<int> indices = new List<int>();
+		Vector3[] vertices = new Vector3[Resolution * Resolution];
+		int[] triangles = new int[(Resolution - 1) * (Resolution - 1) * 6];
+		int triIndex = 0;
 
 		for (int x = 0; x < Resolution; x++)
 		{
 			for (int y = 0; y < Resolution; y++)
 			{
-				vertices.Add(new Vector3(x, 0, y));
-				indices.Add((x* Resolution) + y);
-				indices.Add(x*Width + y -1);
-				indices.Add(x*Width + y);
+				int i = x + y * Resolution;
+				Vector2 percent = new Vector2(x, y) / (Resolution - 1);
+				Vector3 pointOnUnitCube = Vector3.Up + (percent.X - .5f) * 2 * axisA + (percent.Y - .5f) * 2 * axisB;
+				Vector3 pointOnUnitSphere = pointOnUnitCube.Normalized();
+				if (x != Resolution - 1 && y != Resolution - 1)
+				{
+					triangles[triIndex] = i;
+					triangles[triIndex + 1] = i + Resolution + 1;
+					triangles[triIndex + 2] = i + Resolution;
+
+					triangles[triIndex + 3] = i;
+					triangles[triIndex + 4] = i + 1;
+					triangles[triIndex + 5] = i + Resolution + 1;
+					triIndex += 6;
+				}
 			}
 		}
 
 		var arrays = new Godot.Collections.Array();
 		arrays.Resize((int)ArrayMesh.ArrayType.Max);
-		arrays[(int)ArrayMesh.ArrayType.Vertex] = vertices.ToArray();
-		arrays[(int)ArrayMesh.ArrayType.Index] = indices.ToArray();
+		arrays[(int)ArrayMesh.ArrayType.Vertex] = vertices;
+		arrays[(int)ArrayMesh.ArrayType.Index] = triangles;
 
 		a_mesh.AddSurfaceFromArrays(Mesh.PrimitiveType.Triangles, arrays);
 		Mesh = a_mesh;
