@@ -9,6 +9,13 @@
       "commandLineArgs": "–path,--verbose\r\n\r\n",
       "workingDirectory": ".",
       "nativeDebugging": true
+    },
+    "Perfil 2": {
+      "commandName": "Executable",
+      "executablePath": "E:\\Tools\\Godot_v4.2.2-stable_mono_win64\\Godot_v4.2.2-stable_mono_win64.exe",
+      "commandLineArgs": "–path,--verbose",
+      "workingDirectory": ".",
+      "nativeDebugging": true
     }
   }
 }

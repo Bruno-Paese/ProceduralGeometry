@@ -1,7 +1,4 @@
 using Godot;
-using Godot.Collections;
-using System;
-using System.Collections.Generic;
 
 [Tool]
 public partial class ProceduralPlane : MeshInstance3D
@@ -47,7 +44,7 @@ public partial class ProceduralPlane : MeshInstance3D
 				int i = x + y * Resolution;
 				Vector2 percent = new Vector2(x, y) / (Resolution - 1);
 				Vector3 pointOnUnitCube = Vector3.Up + (percent.X - .5f) * 2 * axisA + (percent.Y - .5f) * 2 * axisB;
-				Vector3 pointOnUnitSphere = pointOnUnitCube.Normalized();
+				// Vector3 pointOnUnitSphere = pointOnUnitCube.Normalized();
 				if (x != Resolution - 1 && y != Resolution - 1)
 				{
 					triangles[triIndex] = i;
