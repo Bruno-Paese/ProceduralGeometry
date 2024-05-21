@@ -19,9 +19,17 @@ func generate_mesh_func():
 	
 	var noise = FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	noise.seed = randi()
+
+	var axisA = Vector3(Vector3.UP.y, Vector3.UP.z, Vector3.UP.x);
+	var axisB = axisA.cross(Vector3.UP);
 
 	for i in vertices.size():
-		vertices[i].y = noise.get_noise_2d(vertices[i].x, vertices[i].z) * 10
+		#vertices[i].y = (1+ noise.get_noise_2d(vertices[i].x, vertices[i].z)) * 10
+		#vertices[i] = vertices[i].normalized() * 100
+		vertices[i] = vertices[i]
+		 
+		
 	data[ArrayMesh.ARRAY_VERTEX] = vertices
 
 	var array_mesh = ArrayMesh.new()
