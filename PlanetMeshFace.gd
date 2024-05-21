@@ -26,8 +26,10 @@ func generate_mesh_func():
 
 	for i in vertices.size():
 		#vertices[i].y = (1+ noise.get_noise_2d(vertices[i].x, vertices[i].z)) * 10
-		#vertices[i] = vertices[i].normalized() * 100
-		vertices[i] = vertices[i]
+		vertices[i].y = vertices[i].y + Vector3.UP.y
+		vertices[i].x = vertices[i].x * 0.02
+		vertices[i].z = vertices[i].z * 0.02
+		vertices[i] = vertices[i].normalized() * 100
 		 
 		
 	data[ArrayMesh.ARRAY_VERTEX] = vertices
