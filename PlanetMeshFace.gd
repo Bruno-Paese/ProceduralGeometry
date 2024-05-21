@@ -1,5 +1,5 @@
 @tool
-extends StaticBody3D
+extends Node3D
 
 @export var generate_mesh: bool :
 	set(val):
@@ -9,8 +9,8 @@ func generate_mesh_func():
 	print("generateMesh")
 	var plane_mesh = PlaneMesh.new()
 	plane_mesh.size = Vector2(100,100)
-	plane_mesh.subdivide_depth = 100
-	plane_mesh.subdivide_width = 100
+	plane_mesh.subdivide_depth = 10
+	plane_mesh.subdivide_width = 10
 
 	var surface_tool = SurfaceTool.new()
 	surface_tool.create_from(plane_mesh, 0)
